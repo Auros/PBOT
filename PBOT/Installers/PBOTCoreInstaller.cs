@@ -1,4 +1,5 @@
-﻿using Zenject;
+﻿using PBOT.Services;
+using Zenject;
 
 namespace PBOT.Installers
 {
@@ -6,7 +7,7 @@ namespace PBOT.Installers
     {
         public override void InstallBindings()
         {
-
+            Container.Bind<IDeltaService>().To<BeatLeaderDeltaService>().AsSingle();
         }
     }
 }
