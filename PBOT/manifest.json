@@ -3,11 +3,28 @@
   "id": "PBOT",
   "name": "PBOT",
   "author": "Auros",
-  "version": "1.0.0-dev.1",
+  "version": "1.0.0",
   "description": "Displays the player's personal best score (%) at the time of their current play.",
   "gameVersion": "1.28.0",
   "dependsOn": {
     "BSIPA": "^4.2.1",
-    "SiraUtil": "^3.0.0"
-  }
+    "SiraUtil": "^3.0.0",
+    "protobuf-net": "^3.0.0"
+  },
+  "features": {
+    "CountersPlus.CustomCounter": {
+      "Name": "PBOT",
+      "Description": "Shows the accuracy from your personal best at the current point in song time.",
+      "CounterLocation": "PBOT.Managers.DeltaRankCounterVisualManager",
+      "MultiplayerReady": true,
+      "BSML": {
+        "Host": "PBOT.UI.CounterSettingsViewModel",
+        "Resource": "PBOT.UI.counter-settings-view.bsml"
+      }
+    }
+  },
+  "loadAfter": [
+    "Counters+",
+    "BeatSaberMarkupLanguage"
+  ]
 }

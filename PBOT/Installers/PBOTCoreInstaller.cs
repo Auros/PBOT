@@ -1,4 +1,5 @@
-﻿using PBOT.Services;
+﻿using PBOT.Managers;
+using PBOT.Services;
 using Zenject;
 
 namespace PBOT.Installers
@@ -7,7 +8,11 @@ namespace PBOT.Installers
     {
         public override void InstallBindings()
         {
-            Container.Bind<IDeltaService>().To<BeatLeaderDeltaService>().AsSingle();
+            Container.Bind<FileSystemDeltaService>().AsSingle();
+            Container.Bind<BeatLeaderScoreGraphDeltaService>().AsSingle();
+            Container.Bind<IMultiplexedDeltaService>().To<CachableTimeBasedMultiplexedDeltaService>().AsSingle();
+            Container.Bind<IFrameContainerService>().To<FrameContainerService>().AsSingle();
+            Container.BindInterfacesTo<DeltaFrameSavingManager>().AsSingle();
         }
     }
 }

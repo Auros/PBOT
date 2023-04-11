@@ -9,7 +9,7 @@
 		<LocalRefsDir Condition="Exists('..\Refs')">..\Refs</LocalRefsDir>
 		<BeatSaberDir>$(LocalRefsDir)</BeatSaberDir>
 		<AppOutputBase>$(MSBuildProjectDirectory)\</AppOutputBase>
-		<Copyright>Copyright © auros 2023</Copyright>
+		<Copyright>Copyright © Auros 2023</Copyright>
 		<AssemblyName>PBOT</AssemblyName>
 		<RootNamespace>PBOT</RootNamespace>
 		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
@@ -38,6 +38,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <None Remove="UI\counter-settings-view.bsml" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<Reference Include="Core">
 			<HintPath>$(BeatSaberDir)\Beat Saber_Data\Managed\Core.dll</HintPath>
 			<Private>False</Private>
@@ -62,8 +66,16 @@
 			<HintPath>$(BeatSaberDir)\Libs\Newtonsoft.Json.dll</HintPath>
 			<Private>False</Private>
 		</Reference>
-    <Reference Include="BeatLeader">
-      <HintPath>$(BeatSaberDir)\Plugins\BeatLeader.dll</HintPath>
+    <Reference Include="protobuf-net">
+      <HintPath>$(BeatSaberDir)\Libs\protobuf-net.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="BSML">
+      <HintPath>$(BeatSaberDir)\Plugins\BSML.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Counters+">
+      <HintPath>$(BeatSaberDir)\Plugins\Counters+.dll</HintPath>
       <Private>False</Private>
     </Reference>
 		<Reference Include="SiraUtil">
@@ -122,6 +134,10 @@
 			<HintPath>$(BeatSaberDir)\Beat Saber_Data\Managed\IPA.Loader.dll</HintPath>
 			<Private>False</Private>
 		</Reference>
+    <Reference Include="Polyglot">
+      <HintPath>$(BeatSaberDir)\Beat Saber_Data\Managed\Polyglot.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
 		<Reference Include="VRUI">
 			<HintPath>$(BeatSaberDir)\Beat Saber_Data\Managed\VRUI.dll</HintPath>
 			<Private>False</Private>
@@ -138,6 +154,7 @@
 
 	<ItemGroup>
 		<EmbeddedResource Include="manifest.json" />
+		<EmbeddedResource Include="UI\counter-settings-view.bsml" />
 	</ItemGroup>
 
 	<ItemGroup>
