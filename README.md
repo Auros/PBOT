@@ -10,6 +10,7 @@ It will also pull the data if there is an existing score on BeatLeader.
 ## Dependencies
 
 * SiraUtil
+* protobuf-net
 * BSML (Optional)
 * Counters+ (Optional, for in game configuration & position adjusting)
 
