@@ -9,9 +9,6 @@ internal class PBOTGameplayInstaller : Installer
 {
     public override void InstallBindings()
     {
-        if (PluginManager.GetPlugin("Counters+") == null)
-            Container.BindInterfacesTo<DeltaRankUIPanelVisualManager>().AsSingle();
-
         Container.BindInterfacesTo<DeltaRecordingManager>().AsSingle();
         Container.BindInterfacesTo<DeltaPlaybackManager>().AsSingle();
 

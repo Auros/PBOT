@@ -31,7 +31,7 @@ internal class DeltaRankCounterVisualManager : BasicCustomCounter
         _text = CanvasUtility.CreateTextFromSettings(Settings);
         _text.color = _normalColor;
         _text.text = string.Empty;
-        _text.fontSize = 3;
+        _text.fontSize = 2.75f;
 
         if (ColorUtility.TryParseHtmlString(_config.BeatingFrameColor, out var goodColor))
             _goodColor = goodColor;

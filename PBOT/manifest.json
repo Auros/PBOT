@@ -3,7 +3,7 @@
   "id": "PBOT",
   "name": "PBOT",
   "author": "Auros",
-  "version": "1.0.0",
+  "version": "1.0.1-beta.1",
   "description": "Displays the player's personal best score (%) at the time of their current play.",
   "gameVersion": "1.28.0",
   "dependsOn": {

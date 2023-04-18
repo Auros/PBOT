@@ -30,6 +30,9 @@ internal class DeltaRankUIPanelVisualManager : IInitializable, System.IDisposabl
 
     public void Initialize()
     {
+        if (_initData.hide)
+            return;
+
         _deltaPlaybackService.OnFrameUpdated += SetFrame;
         var panel = Object.FindObjectOfType<CoreGameHUDController>().GetComponentInChildren<ImmediateRankUIPanel>();
         var originalText = panel.GetField<TextMeshProUGUI, ImmediateRankUIPanel>("_relativeScoreText");
