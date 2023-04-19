@@ -22,7 +22,7 @@ namespace PBOT
             zenjector.Install<PBOTCoreInstaller>(Location.App);
             zenjector.Install<PBOTGameplayInstaller>(Location.Player);
             zenjector.Install(Location.App, Container => Container.BindInstance(config).AsSingle());
-            zenjector.Install(Location.Singleplayer | Location.CampaignPlayer, Container =>
+            zenjector.Install(Location.StandardPlayer | Location.CampaignPlayer, Container =>
             {
                 // Install the visual panel if counters+ is not installed... only in singleplayer and campaign
                 if (PluginManager.GetPlugin("Counters+") != null)
