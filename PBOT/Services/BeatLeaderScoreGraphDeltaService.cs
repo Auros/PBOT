@@ -78,7 +78,7 @@ internal class BeatLeaderScoreGraphDeltaService : IDeltaService
         var (hash, mode, difficulty) = contract;
 
         _siraLog.Debug($"Loading metadata for {contract}");
-        var user = await _platformUserModel.GetUserInfo();
+        var user = await _platformUserModel.GetUserInfo(cancellationToken);
         var url = $"{_beatLeaderApiUrl}/score/{user.platformUserId}/{hash}/{difficulty.SerializedName()}/{mode}";
         var response = await _httpService.GetAsync(url, cancellationToken: cancellationToken);
         if (!response.Successful)
