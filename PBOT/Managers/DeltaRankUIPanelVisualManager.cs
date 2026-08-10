@@ -1,7 +1,7 @@
 ﻿using IPA.Utilities;
 using PBOT.Models;
 using PBOT.Services;
-using Polyglot;
+using BGLib.Polyglot;
 using TMPro;
 using UnityEngine;
 using Zenject;
@@ -34,7 +34,7 @@ internal class DeltaRankUIPanelVisualManager : IInitializable, System.IDisposabl
             return;
 
         _deltaPlaybackService.OnFrameUpdated += SetFrame;
-        var panel = Object.FindObjectOfType<CoreGameHUDController>().GetComponentInChildren<ImmediateRankUIPanel>();
+        var panel = Object.FindAnyObjectByType<CoreGameHUDController>().GetComponentInChildren<ImmediateRankUIPanel>();
         var originalText = panel.GetField<TextMeshProUGUI, ImmediateRankUIPanel>("_relativeScoreText");
 
         var gameObject = Object.Instantiate(originalText.gameObject, originalText.transform.parent);

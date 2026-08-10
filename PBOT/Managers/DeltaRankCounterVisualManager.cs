@@ -1,7 +1,7 @@
 ﻿using CountersPlus.Counters.Custom;
 using PBOT.Models;
 using PBOT.Services;
-using Polyglot;
+using BGLib.Polyglot;
 using TMPro;
 using UnityEngine;
 

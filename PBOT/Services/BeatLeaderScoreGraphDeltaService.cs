@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using OculusStudios.Platform.Core;
 using PBOT.Models;
 using SiraUtil.Logging;
 using SiraUtil.Web;
@@ -13,7 +14,7 @@ internal class BeatLeaderScoreGraphDeltaService : IDeltaService
 {
     private readonly SiraLog _siraLog;
     private readonly IHttpService _httpService;
-    private readonly IPlatformUserModel _platformUserModel;
+    private readonly IPlatform _platformUserModel;
     private const string _beatLeaderApiUrl = "https://api.beatleader.xyz";
     private CachedContractId? _cached;
 
@@ -23,7 +24,7 @@ internal class BeatLeaderScoreGraphDeltaService : IDeltaService
     private record struct BeatLeaderScore([property: JsonProperty("id")] int Id, [property: JsonProperty("modifiedScore")] int TotalScore, [property: JsonProperty("timeset")] string TimeSet); // Why is the timestamp a string?
     private class BeatLeaderMetadata : DeltaMetadata { [JsonIgnore] public int Id { get; set; } }
 
-    public BeatLeaderScoreGraphDeltaService(SiraLog siraLog, IHttpService httpService, IPlatformUserModel platformUserModel)
+    public BeatLeaderScoreGraphDeltaService(SiraLog siraLog, IHttpService httpService, IPlatform platformUserModel)
     {
         _siraLog = siraLog;
         _httpService = httpService;
@@ -78,7 +79,15 @@ internal class BeatLeaderScoreGraphDeltaService : IDeltaService
         var (hash, mode, difficulty) = contract;
 
         _siraLog.Debug($"Loading metadata for {contract}");
-        var user = await _platformUserModel.GetUserInfo();
+        UserInfo user = new UserInfo(_platformUserModel.key switch
+        {
+            "steam" => UserInfo.Platform.Steam,
+            "oculus" => UserInfo.Platform.Oculus,
+            "oculus-mock" => UserInfo.Platform.Oculus,
+            "mock" => UserInfo.Platform.Test,
+            _ => throw new NotImplementedException(),
+        }, _platformUserModel.user.userId.ToString(), _platformUserModel.user.displayName);
+
         var url = $"{_beatLeaderApiUrl}/score/{user.platformUserId}/{hash}/{difficulty.SerializedName()}/{mode}";
         var response = await _httpService.GetAsync(url, cancellationToken: cancellationToken);
         if (!response.Successful)
